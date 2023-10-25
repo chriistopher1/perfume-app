@@ -3,6 +3,7 @@ import Hero from "../components/hero/hero";
 import AboutUs from "../components/aboutus/about-us";
 import Product from "../components/product/product";
 import Contact from "../components/contact/contact";
+import Program from "../components/program/program";
 
 function Layout() {
   return (
@@ -11,7 +12,9 @@ function Layout() {
         <Hero />
         <AboutUs />
         <Product />
+        <Program />
         <Contact />
+       
     </div>
   )
 }
