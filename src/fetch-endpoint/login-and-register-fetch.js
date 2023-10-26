@@ -118,11 +118,12 @@ export async function getAuthenticatedUserFetch() {
 }
 
 export async function signOutAuthenticatedUserFetch() {
+  Cookies.remove("token");
   await fetch("https://perfume-backend-tau.vercel.app/sign-out", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   });
-  Cookies.remove("token");
+  
 }
