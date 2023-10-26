@@ -9,7 +9,7 @@ export async function checkJwtToken() {
 
   try {
     const response = await fetch(
-      "http://localhost:5000/get-authenticated-user",
+      "https://perfume-backend-tau.vercel.app/get-authenticated-user",
       {
         method: "POST",
         headers: {
