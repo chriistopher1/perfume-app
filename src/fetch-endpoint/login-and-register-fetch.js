@@ -124,4 +124,5 @@ export async function signOutAuthenticatedUserFetch() {
       "Content-Type": "application/json",
     },
   });
+  Cookies.remove("token");
 }
