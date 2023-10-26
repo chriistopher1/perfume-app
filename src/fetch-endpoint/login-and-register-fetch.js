@@ -1,4 +1,5 @@
 import DOMPurify from "dompurify";
+import Cookies from "js-cookie";
 
 export async function registerFormValidationFetch(formData) {
   //   console.log(formData);
@@ -77,8 +78,15 @@ export async function loginFormValidationFetch(formData) {
 
     if (response.ok) {
       const data = await response.json();
+
+      console.log("ok");
+      console.log("data = ", data);
+      if (data.token !== null) {
+        Cookies.set("token", data.token, { expires: 7, path: "/" });
+      }
+
       //   console.log(data.response);
-      return data.response;
+      return data.message;
     } else {
       console.error("Server responded with an error:", response.status);
       return "Server Error";
@@ -101,7 +109,7 @@ export async function getAuthenticatedUserFetch() {
     const data = await response.json();
 
     if (data.user !== null) {
-    //   console.log(data.user);
+      //   console.log(data.user);
       return data.user;
     }
 

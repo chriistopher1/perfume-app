@@ -1,21 +1,19 @@
 import { useState, useEffect } from "react";
 
-import {
-  getAuthenticatedUserFetch,
-  signOutAuthenticatedUserFetch,
-} from "../../fetch-endpoint/login-and-register-fetch";
+import { signOutAuthenticatedUserFetch } from "../../fetch-endpoint/login-and-register-fetch";
+import { checkJwtToken } from "../../fetch-endpoint/jwt-token";
+
 
 function Content() {
   const [authenticatedUser, setAuthenticatedUser] = useState(null);
 
   useEffect(() => {
     const fetchAuthenticatedUser = async () => {
+      const response = await checkJwtToken();
+
+      // console.log("response = ", response);
+      setAuthenticatedUser(response);
       try {
-        const user = await getAuthenticatedUserFetch();
-        if (user !== null) {
-          setAuthenticatedUser(user);
-          // console.log(authenticatedUser);
-        }
       } catch (error) {
         console.error("Error fetching authenticated user:", error);
       }
@@ -25,14 +23,14 @@ function Content() {
   }, []);
   return (
     <div>
-      <div className="text-xl font-semibold mb-4">MAIN CONTENT</div>
+      <div className="mb-5 text-xl font-semibold">MAIN CONTENT</div>
       {authenticatedUser === null ? (
-        <a className="bg-white p-2 text-black mt-4" href="/login">
+        <a className="mt-4 bg-white p-2 text-black" href="/login">
           <span className="font-bold">LOGIN</span>
         </a>
       ) : (
         <div className="mt-4">
-          <div className="mb-5">Welcome {authenticatedUser.email}</div>
+          <div className="mb-5">Welcome {authenticatedUser}</div>
           <a
             className=" bg-white p-2 text-black"
             href="/content"
@@ -40,7 +38,7 @@ function Content() {
               signOutAuthenticatedUserFetch();
             }}
           >
-            <span className="font-bold" >SIGNOUT</span>
+            <span className="font-bold">SIGNOUT</span>
           </a>
         </div>
       )}
