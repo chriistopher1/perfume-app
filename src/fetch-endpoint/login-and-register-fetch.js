@@ -124,7 +124,10 @@ export async function signOutAuthenticatedUserFetch() {
       "Content-Type": "application/json",
     },
   });
+  console.log("error1");
   Cookies.remove("token");
+  console.log("error2");
+  
 }
 
 export async function sendEmailVerificationToUserFetch(){
