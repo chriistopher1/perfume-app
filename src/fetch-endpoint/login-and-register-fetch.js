@@ -30,7 +30,7 @@ export async function registerFormValidationFetch(formData) {
 
   try {
     const response = await fetch(
-      "http://localhost:5000/register-form-validation",
+      "https://perfume-backend-tau.vercel.app/register-form-validation",
       {
         method: "POST",
         headers: {
@@ -66,7 +66,7 @@ export async function loginFormValidationFetch(formData) {
 
   try {
     const response = await fetch(
-      "http://localhost:5000/login-form-validation",
+      "https://perfume-backend-tau.vercel.app/login-form-validation",
       {
         method: "POST",
         headers: {
@@ -98,7 +98,7 @@ export async function loginFormValidationFetch(formData) {
 }
 
 export async function getAuthenticatedUserFetch() {
-  const response = await fetch("http://localhost:5000/get-authenticated-user", {
+  const response = await fetch("https://perfume-backend-tau.vercel.app/get-authenticated-user", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -118,7 +118,7 @@ export async function getAuthenticatedUserFetch() {
 }
 
 export async function signOutAuthenticatedUserFetch() {
-   await fetch("http://localhost:5000/sign-out", {
+   await fetch("https://perfume-backend-tau.vercel.app/sign-out", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -131,7 +131,7 @@ export async function sendEmailVerificationToUserFetch(){
 
   console.log("masuk function send email");
 
-  const response = await fetch("http://localhost:5000/send-email-verification", {
+  const response = await fetch("https://perfume-backend-tau.vercel.app/send-email-verification", {
     method: "POST",
     headers:{
       "Content-Type": "application/json"
