@@ -21,8 +21,8 @@ export async function checkJwtToken() {
 
     if (response.ok) {
       const data = await response.json();
-      //   console.log("data = ", data);
-      return data.user.email;
+        // console.log("data = ", data);
+      return data.user.user;
     }
     return null;
   } catch (error) {

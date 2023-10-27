@@ -30,7 +30,7 @@ export async function registerFormValidationFetch(formData) {
 
   try {
     const response = await fetch(
-      "https://perfume-backend-tau.vercel.app/register-form-validation",
+      "http://localhost:5000/register-form-validation",
       {
         method: "POST",
         headers: {
@@ -66,7 +66,7 @@ export async function loginFormValidationFetch(formData) {
 
   try {
     const response = await fetch(
-      "https://perfume-backend-tau.vercel.app/login-form-validation",
+      "http://localhost:5000/login-form-validation",
       {
         method: "POST",
         headers: {
@@ -80,9 +80,9 @@ export async function loginFormValidationFetch(formData) {
       const data = await response.json();
 
       console.log("ok");
-      console.log("data = ", data);
+      // console.log("data = ", data);
       if (data.token !== null) {
-        Cookies.set("token", data.token, { expires: 7, path: "/" });
+        Cookies.set("token", data.token, { expires: 1/24, path: "/" });
       }
 
       //   console.log(data.response);
@@ -98,7 +98,7 @@ export async function loginFormValidationFetch(formData) {
 }
 
 export async function getAuthenticatedUserFetch() {
-  const response = await fetch("https://perfume-backend-tau.vercel.app/get-authenticated-user", {
+  const response = await fetch("http://localhost:5000/get-authenticated-user", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -109,7 +109,7 @@ export async function getAuthenticatedUserFetch() {
     const data = await response.json();
 
     if (data.user !== null) {
-      //   console.log(data.user);
+        console.log(data.user);
       return data.user;
     }
 
@@ -118,10 +118,32 @@ export async function getAuthenticatedUserFetch() {
 }
 
 export async function signOutAuthenticatedUserFetch() {
-  await fetch("https://perfume-backend-tau.vercel.app/sign-out", {
+   await fetch("http://localhost:5000/sign-out", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   });
+  Cookies.remove("token");
+}
+
+export async function sendEmailVerificationToUserFetch(){
+
+  console.log("masuk function send email");
+
+  const response = await fetch("http://localhost:5000/send-email-verification", {
+    method: "POST",
+    headers:{
+      "Content-Type": "application/json"
+    }
+  });
+
+  if(response.ok){
+
+    const data = await response.json();
+    console.log("data = ", data);
+    return data.message;
+
+  }
+  return "Server error...";
 }

@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { signOutAuthenticatedUserFetch } from "../../fetch-endpoint/login-and-register-fetch";
 import { checkJwtToken } from "../../fetch-endpoint/jwt-token";
 
-
 function Content() {
   const [authenticatedUser, setAuthenticatedUser] = useState(null);
 
@@ -11,8 +10,9 @@ function Content() {
     const fetchAuthenticatedUser = async () => {
       const response = await checkJwtToken();
 
+      if (response !== null) setAuthenticatedUser(response);
       // console.log("response = ", response);
-      setAuthenticatedUser(response);
+
       try {
       } catch (error) {
         console.error("Error fetching authenticated user:", error);
@@ -30,12 +30,21 @@ function Content() {
         </a>
       ) : (
         <div className="mt-4">
-          <div className="mb-5">Welcome {authenticatedUser}</div>
+          <div className="mb-5">Welcome {authenticatedUser.email}</div>
+          {authenticatedUser.emailVerified ? (
+            <div className="mb-5">Email is verified</div>
+          ) : (
+            <div className="mb-5">
+              Email is not verified. Click{" "}
+              <a className="cursor-pointer text-blue-300 underline" href="/verify-email">here</a> to
+              verify
+            </div>
+          )}
           <a
             className=" bg-white p-2 text-black"
             href="/content"
             onClick={async () => {
-              signOutAuthenticatedUserFetch();
+              await signOutAuthenticatedUserFetch();
             }}
           >
             <span className="font-bold">SIGNOUT</span>
