@@ -11,7 +11,7 @@ function Content() {
       const response = await checkJwtToken();
 
       if (response !== null) setAuthenticatedUser(response);
-      // console.log("response = ", response);
+      console.log("response = ", response);
 
       try {
       } catch (error) {
