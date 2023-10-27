@@ -118,6 +118,8 @@ export async function getAuthenticatedUserFetch() {
 }
 
 export async function signOutAuthenticatedUserFetch() {
+  console.log("error0");
+  
    await fetch("https://perfume-backend-tau.vercel.app/sign-out", {
     method: "GET",
     headers: {
